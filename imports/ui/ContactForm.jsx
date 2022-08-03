@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ContactsCollection } from "../api/ContactsCollection";
 import { Meteor } from "meteor/meteor";
 import { ErrorAlert } from "./components/ErrorAlert";
 import { SuccessAlert } from "./components/SuccessAlert";
