@@ -7,26 +7,32 @@ export const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
+  const [walletId, setWalletId] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const saveContact = () => {
-    Meteor.call("contacts.insert", { name, email, image }, (error) => {
-      if (error) {
-        setError(error.error);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-      } else {
-        setName("");
-        setEmail("");
-        setImage("");
-        setSuccess("Contact saved.");
-        setTimeout(() => {
-          setSuccess("");
-        }, 3000);
+    Meteor.call(
+      "contacts.insert",
+      { name, email, image, walletId },
+      (error) => {
+        if (error) {
+          setError(error.error);
+          setTimeout(() => {
+            setError("");
+          }, 3000);
+        } else {
+          setName("");
+          setEmail("");
+          setImage("");
+          setWalletId("");
+          setSuccess("Contact saved.");
+          setTimeout(() => {
+            setSuccess("");
+          }, 3000);
+        }
       }
-    });
+    );
   };
 
   return (
@@ -48,7 +54,7 @@ export const ContactForm = () => {
             onChange={(e) => {
               setName(e.target.value);
             }}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-700 focus:border-emerald-700"
           />
         </div>
         <div className="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -65,7 +71,7 @@ export const ContactForm = () => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-700 focus:border-emerald-700"
           />
         </div>
         <div className="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -82,14 +88,31 @@ export const ContactForm = () => {
             onChange={(e) => {
               setImage(e.target.value);
             }}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-700 focus:border-emerald-700"
           />
         </div>
-        <div className="pb-5">
+        <div className="col-span-6">
+          <label
+            htmlFor="walletId"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Wallet ID
+          </label>
+          <input
+            id="walletId"
+            type="text"
+            value={walletId}
+            onChange={(e) => {
+              setWalletId(e.target.value);
+            }}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-700 focus:border-emerald-700"
+          />
+        </div>
+        <div className="col-span-6">
           <button
             type="button"
             onClick={saveContact}
-            className="block w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="block w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-700 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
           >
             Save Contact
           </button>

@@ -1,11 +1,16 @@
 import React, { memo } from "react";
 import { ContactsCollection } from "../api/ContactsCollection";
 import { useSubscribe, useFind } from "meteor/react-meteor-data";
+import { Loading } from "./components/Loading";
 
 export const ContactList = () => {
   const isLoading = useSubscribe("allContacts");
   const contacts = useFind(() =>
-    ContactsCollection.find({}, { sort: { createdAt: -1 } })
+    ContactsCollection.find(
+      {},
+      { archived: { $ne: true } },
+      { sort: { createdAt: -1 } }
+    )
   );
 
   const removeContact = (e, _id) => {
@@ -14,15 +19,7 @@ export const ContactList = () => {
   };
 
   if (isLoading()) {
-    return (
-      <div>
-        <div className="mt-10">
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-            Loading...
-          </h3>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   const Contact = memo(({ contact }) => {
@@ -32,19 +29,24 @@ export const ContactList = () => {
         className="py-4 flex items-center justify-between space-x-3"
       >
         <div className="min-w-0 flex-1 flex items-center space-x-3">
-          <div className="flex-shrink-0">
-            <img
-              alt=""
-              src={contact.image}
-              className="h-10 w-10 rounded-full"
-            />
-          </div>
+          {contact.image && (
+            <div className="flex-shrink-0">
+              <img
+                alt=""
+                src={contact.image}
+                className="h-10 w-10 rounded-full"
+              />
+            </div>
+          )}
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-gray-900 truncate">
+            <p className="text-sm font-medium text-grey-900 truncate">
               {contact.name}
             </p>
-            <p className="text-sm font-medium text-gray-900 truncate">
+            <p className="text-sm font-medium text-gray-500 truncate">
               {contact.email}
+            </p>
+            <p className="text-sm font-medium text-gray-500 truncate">
+              {contact.walletId}
             </p>
           </div>
           <div>
