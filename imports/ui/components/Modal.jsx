@@ -1,7 +1,6 @@
 import React from "react";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationIcon } from "@heroicons/react/outline";
 
 export const Modal = ({ open, setOpen, title, body, footer, errorMessage }) => {
   const cancelButtonRef = useRef(null);
