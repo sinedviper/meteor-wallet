@@ -8,7 +8,7 @@ import {
 } from "../collections/TransactionsCollection";
 
 Meteor.methods({
-  "transitions.insert"(args) {
+  "transactions.insert"(args) {
     const schema = new SimpleSchema({
       isTransferring: {
         type: Boolean,

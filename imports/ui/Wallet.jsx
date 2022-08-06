@@ -26,7 +26,7 @@ export const Wallet = () => {
 
   const addTransaction = () => {
     Meteor.call(
-      "transitions.insert",
+      "transactions.insert",
       {
         isTransferring,
         sourceWalletId: wallet._id,
@@ -83,7 +83,7 @@ export const Wallet = () => {
                   setOpen(true);
                 }}
               >
-                Save Contact
+                Add money
               </button>
               <button
                 type="button"

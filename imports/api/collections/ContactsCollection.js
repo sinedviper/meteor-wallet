@@ -9,7 +9,7 @@ const ContactsSchema = new SimpleSchema({
   },
   email: {
     type: String,
-    //regEx: SimpleSchema.RefEx.Email,
+    regEx: SimpleSchema.RegEx.Email,
   },
   image: {
     type: String,
@@ -17,9 +17,9 @@ const ContactsSchema = new SimpleSchema({
   },
   walletId: {
     type: String,
-    //regEx: SimpleSchema.RefEx.Id,
+    regEx: SimpleSchema.RegEx.Id,
   },
-  createAt: {
+  createdAt: {
     type: Date,
   },
 });
